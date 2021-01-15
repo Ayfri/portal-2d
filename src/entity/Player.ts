@@ -5,7 +5,7 @@ export default class Player extends Entity {
 		super('player');
 	}
 	
-	public load() {
+	public setup() {
 	}
 	
 	public update() {

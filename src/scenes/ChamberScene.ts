@@ -9,7 +9,7 @@ export default class ChamberScene extends Scene {
 		this.player = new Player();
 	}
 	
-	public load() {
+	public setup() {
 		this.addChild(this.player);
 	}
 	

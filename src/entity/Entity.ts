@@ -6,10 +6,10 @@ export default abstract class Entity extends PIXI.Sprite {
 	protected constructor(texture: PIXI.Texture | string) {
 		if (typeof texture === 'string') texture = PIXI.Loader.shared.resources[texture].texture;
 		super(texture);
-		this.load();
+		this.setup();
 	}
 	
-	abstract load();
+	abstract setup();
 	
 	abstract update();
 	
