@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js';
+import Entity from '../entity/Entity.js';
 
 export default abstract class Scene extends PIXI.Container {
 	public background: PIXI.Sprite;
@@ -10,7 +11,11 @@ export default abstract class Scene extends PIXI.Container {
 	
 	abstract setup();
 	
-	abstract update();
+	update() {
+		this.children.forEach(child => {
+			if (child instanceof Entity) child.update();
+		});
+	}
 	
 	destroy() {
 		super.destroy();
