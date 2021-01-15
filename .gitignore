@@ -1,0 +1,9 @@
+# JetBrains
+.idea
+
+# Node
+package-lock.json
+yarn.lock
+
+# Compilation
+dist
