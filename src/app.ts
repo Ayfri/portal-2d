@@ -3,13 +3,16 @@ import ChamberScene from './scenes/ChamberScene.js';
 
 export const app = new PIXI.Application({
 	antialias: true,
-	resizeTo: window,
+	resizeTo:  window,
+	backgroundColor: 0xdddddd
 });
 
-function loadTextures() {
-	PIXI.Loader.shared.add('test', 'assets/test.png');
-	PIXI.Loader.shared.add('player', 'assets/player.png');
-	PIXI.Loader.shared.load();
+async function loadTextures() {
+	await new Promise((resolve) => {
+		PIXI.Loader.shared.add('test', 'assets/test.png');
+		PIXI.Loader.shared.add('player', 'assets/player.png');
+		PIXI.Loader.shared.load(resolve);
+	});
 }
 
 function tests() {
@@ -19,10 +22,13 @@ function tests() {
 		app.stage.addChild(sprite);
 	});
 	
-	new ChamberScene();
+	const testChamber: ChamberScene = new ChamberScene();
+	app.stage.addChild(testChamber);
 }
 
-loadTextures();
-tests();
+loadTextures().then(() => {
+	tests();
+});
+
 
 document.body.appendChild(app.view);
