@@ -7,4 +7,4 @@ package-lock.json
 yarn.lock
 
 # Compilation
-dist
+cache
