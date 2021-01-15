@@ -1,14 +1,17 @@
 import * as PIXI from 'pixi.js';
 import ChamberScene from './scenes/ChamberScene.js';
+import Scene from './scenes/Scene.js';
+
+export let actualScene: Scene;
 
 export const app = new PIXI.Application({
 	antialias: true,
-	resizeTo:  window,
-	backgroundColor: 0xdddddd
+	resizeTo: window,
+	backgroundColor: 0xdddddd,
 });
 
 async function loadTextures() {
-	await new Promise((resolve) => {
+	await new Promise(resolve => {
 		PIXI.Loader.shared.add('test', 'assets/test.png');
 		PIXI.Loader.shared.add('player', 'assets/player.png');
 		PIXI.Loader.shared.load(resolve);
@@ -21,14 +24,25 @@ function tests() {
 		sprite.position.set(window.innerWidth / 2, window.innerHeight / 2);
 		app.stage.addChild(sprite);
 	});
-	
-	const testChamber: ChamberScene = new ChamberScene();
-	app.stage.addChild(testChamber);
+
+	PIXI.Ticker.shared.add(
+		() => {
+			actualScene?.update();
+		},
+		undefined,
+		PIXI.UPDATE_PRIORITY.HIGH
+	);
+
+	setScene(new ChamberScene());
+}
+
+function setScene(scene: Scene) {
+	actualScene = scene;
+	app.stage.addChild(actualScene);
 }
 
 loadTextures().then(() => {
 	tests();
 });
-
 
 document.body.appendChild(app.view);
