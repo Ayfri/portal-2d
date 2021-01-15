@@ -3,7 +3,7 @@ const esbuild = require('gulp-esbuild');
 
 function bundle() {
 	return gulp
-		.src('./src/index.ts')
+		.src('./src/app.ts')
 		.pipe(
 			esbuild({
 				outfile: 'bundle.js',
