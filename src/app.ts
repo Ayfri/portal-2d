@@ -6,9 +6,13 @@ export const app = new PIXI.Application({
 	resizeTo: window,
 });
 
-function tests() {
+function loadTextures() {
 	PIXI.Loader.shared.add('test', 'assets/test.png');
+	PIXI.Loader.shared.add('player', 'assets/player.png');
 	PIXI.Loader.shared.load();
+}
+
+function tests() {
 	PIXI.Loader.shared.onComplete.add(() => {
 		const sprite = PIXI.Sprite.from(PIXI.Loader.shared.resources['test'].texture);
 		sprite.position.set(window.innerWidth / 2, window.innerHeight / 2);
@@ -18,6 +22,7 @@ function tests() {
 	new ChamberScene();
 }
 
+loadTextures();
 tests();
 
 document.body.appendChild(app.view);
