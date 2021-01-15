@@ -14,6 +14,7 @@
 		"gulp": "^4.0.2",
 		"gulp-cli": "^2.3.0",
 		"gulp-esbuild": "^0.3.15",
+		"gulp-watch": "^5.0.1",
 		"prettier": "^2.2.1",
 		"serve": "^11.3.2",
 		"typescript": "^4.1.3"
@@ -36,9 +37,11 @@
 		"useTabs": true
 	},
 	"scripts": {
-		"bundle": "gulp bundle",
+		"bundle": "npm run prettier && gulp bundle",
 		"prettier": "prettier gulpfile.js package.json tsconfig.json README.md src --write",
-		"start": "npm run bundle && serve dist/"
+		"start": "npm run bundle && npm run serve",
+		"serve": "serve dist/",
+		"watch": "gulp watch"
 	},
 	"version": "1.0.0"
 }
