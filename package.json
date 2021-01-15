@@ -35,7 +35,7 @@
 		"useTabs": true
 	},
 	"scripts": {
-		"prettier": "pretier package.json tsconfig.json README.md src --write"
+		"prettier": "prettier package.json tsconfig.json README.md src --write"
 	},
 	"version": "1.0.0"
 }
