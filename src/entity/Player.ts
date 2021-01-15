@@ -18,7 +18,7 @@ export default class Player extends Entity {
 
 		walls.forEach(wall => {
 			if (mathUtils.isRectangleCollapse(this, wall)) {
-				console.log(mathUtils.manageRectangleCollisions(this, wall));
+//				console.log(mathUtils.manageRectangleCollisions(this, wall));
 
 				let velocity: PIXI.Point = mathUtils.collisionResponse(this, wall);
 				this.velocity.set(velocity.x, -velocity.y);
