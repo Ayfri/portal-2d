@@ -35,6 +35,7 @@
 		"useTabs": true
 	},
 	"scripts": {
+		"bundle": "gulp bundle",
 		"prettier": "prettier gulpfile.js package.json tsconfig.json README.md src --write"
 	},
 	"version": "1.0.0"
