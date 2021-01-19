@@ -10,6 +10,7 @@ export default abstract class Entity extends PIXI.Sprite implements EntityOption
 	public canFall: boolean;
 	public velocity: PIXI.Point;
 	public mass: number;
+	public isOnGround: boolean;
 
 	protected constructor(texture: string, options?: EntityOptions);
 	protected constructor(texture: PIXI.Texture, options?: EntityOptions);
@@ -27,6 +28,9 @@ export default abstract class Entity extends PIXI.Sprite implements EntityOption
 		this.hasGravity = options?.hasGravity ?? false;
 		this.mass = options?.mass ?? 1;
 		this.canFall = true;
+		this.isOnGround = false;
+		
+		this.on('update' ,() => this.update());
 	}
 
 	abstract setup();

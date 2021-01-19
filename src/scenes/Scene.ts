@@ -14,7 +14,7 @@ export default abstract class Scene extends PIXI.Container {
 
 	update() {
 		this.children.forEach(child => {
-			if (child instanceof Entity) child.update();
+			if (child instanceof Entity) child.emit('update');
 		});
 	}
 
