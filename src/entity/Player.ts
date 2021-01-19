@@ -13,12 +13,16 @@ export default class Player extends Entity {
 
 	public setup() {}
 
+	public move(direction: PIXI.Point, speed: number) {
+		this.velocity = direction.set(direction.x * speed, direction.y * speed);
+	}
+
 	public update() {
 		const walls: WallEntity[] = actualScene.children.filter((entity: Entity): entity is WallEntity => entity instanceof WallEntity);
 
 		walls.forEach(wall => {
 			if (mathUtils.isRectangleCollapse(this, wall)) {
-//				console.log(mathUtils.manageRectangleCollisions(this, wall));
+				//				console.log(mathUtils.manageRectangleCollisions(this, wall));
 
 				let velocity: PIXI.Point = mathUtils.collisionResponse(this, wall);
 				this.velocity.set(velocity.x, -velocity.y);
