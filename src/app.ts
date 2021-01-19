@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
-import ChamberScene from './scenes/ChamberScene.js';
 import Scene from './scenes/Scene.js';
+import TestChamber from './scenes/TestChamber.js';
 
 export let actualScene: Scene;
 
@@ -14,6 +14,7 @@ async function loadTextures() {
 	await new Promise(resolve => {
 		PIXI.Loader.shared.add('test', 'assets/test.png');
 		PIXI.Loader.shared.add('player', 'assets/player.png');
+		PIXI.Loader.shared.add('testChamberBackground', 'assets/test level.png');
 		PIXI.Loader.shared.load(resolve);
 	});
 }
@@ -33,7 +34,7 @@ function tests() {
 		PIXI.UPDATE_PRIORITY.HIGH
 	);
 
-	setScene(new ChamberScene());
+	setScene(new TestChamber());
 }
 
 function setScene(scene: Scene) {
