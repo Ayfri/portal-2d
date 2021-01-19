@@ -16,6 +16,10 @@ export default abstract class Scene extends PIXI.Container {
 		this.children.forEach(child => {
 			if (child instanceof Entity) child.emit('update');
 		});
+		
+		this.sortChildren();
+		this.background.width = window.innerWidth;
+		this.background.height = window.innerHeight;
 	}
 
 	destroy() {

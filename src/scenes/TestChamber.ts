@@ -8,13 +8,14 @@ export default class TestChamber extends ChamberScene {
 	
 	
 	public setup() {
+		this.background = PIXI.Sprite.from(PIXI.Loader.shared.resources['testChamberBackground'].texture);
+		this.background.width = window.innerWidth;
+		this.background.height = window.innerHeight;
+		this.addChild(this.background);
+		
 		this.spawnPlayer({
 			x: 1600,
 			y: 500
 		});
-		
-		this.background = PIXI.Sprite.from(PIXI.Loader.shared.resources['testChamberBackground'].texture);
-		this.background.zIndex = -1000;
-		this.addChild(this.background);
 	}
 }
