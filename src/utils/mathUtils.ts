@@ -83,15 +83,10 @@ export function collisionResponse(entityFrom: Entity, entityInto: Entity): PIXI.
 	}
 
 	const vCollision = new PIXI.Point(entityInto.x - entityFrom.x, entityInto.y - entityFrom.y);
-
 	const distance = Math.sqrt((entityInto.x - entityFrom.x) * (entityInto.x - entityFrom.x) + (entityInto.y - entityFrom.y) * (entityInto.y - entityFrom.y));
-
 	const vCollisionNorm = new PIXI.Point(vCollision.x / distance, vCollision.y / distance);
-
 	const vRelativeVelocity = new PIXI.Point(entityFrom.velocity.x - entityInto.velocity.x, entityFrom.velocity.y - entityInto.velocity.y);
-
 	const speed = vRelativeVelocity.x * vCollisionNorm.x + vRelativeVelocity.y * vCollisionNorm.y;
-
 	const impulse = speed / (entityFrom.mass + entityInto.mass);
 
 	return new PIXI.Point(impulse * vCollisionNorm.x, impulse * vCollisionNorm.y);
