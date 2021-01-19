@@ -31,12 +31,12 @@ class Key extends PIXI.utils.EventEmitter {
 		}
 	}
 
-	on(event: 'up' | 'down', fn: (event: KeyboardEvent, duration: number) => unknown, context?: any): this {
+	on(event: 'up' | 'down', fn: (event?: KeyboardEvent, duration?: number) => unknown, context?: any): this {
 		super.on(event, fn, context);
 		return this;
 	}
 
-	once(event: 'up' | 'down', fn: (event: KeyboardEvent, duration: number) => unknown, context?: any): this {
+	once(event: 'up' | 'down', fn: (eventN: KeyboardEvent, durationN: number) => unknown, context?: any): this {
 		super.once(event, fn, context);
 		return this;
 	}
