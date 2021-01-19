@@ -1,5 +1,4 @@
 import * as PIXI from 'pixi.js';
-import Entity from '../entity/Entity.js';
 
 export class Rectangle extends PIXI.Rectangle {
 	public halfWidth: number;
@@ -35,7 +34,6 @@ export function distanceBetweenTwoPoints(p1: PIXI.IPointData, p2: PIXI.IPointDat
 
 	return Math.hypot(a, b);
 }
-
 
 export function manageRectangleCollisions(rectangle1: PIXI.DisplayObject, rectangle2: PIXI.DisplayObject) {
 	const rect1 = Rectangle.fromSprite(rectangle1);

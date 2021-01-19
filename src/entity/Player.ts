@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js';
 import { actualScene } from '../app.js';
 import { D, Q, space } from '../client/InputManager.js';
-import * as mathUtils from '../utils/mathUtils';
+import {isRectangleCollapse, manageRectangleCollisions} from '../utils/collisionsUtils.js';
 import Entity from './Entity';
 import WallEntity from './WallEntity';
 
@@ -31,14 +31,14 @@ export default class Player extends Entity {
 			this.position.y += this.velocity.y;
 		}
 		
-		if (walls.every(wall => !mathUtils.isRectangleCollapse(this, wall))) {
+		if (walls.every(wall => !isRectangleCollapse(this, wall))) {
 			this.canFall = true;
 			this.isOnGround = false;
 		}
 		
 		walls.forEach(wall => {
-			if (mathUtils.isRectangleCollapse(this, wall)) {
-				switch (mathUtils.manageRectangleCollisions(wall, this)) {
+			if (isRectangleCollapse(this, wall)) {
+				switch (manageRectangleCollisions(wall, this)) {
 					case 'bottom':
 						this.move(new PIXI.Point(this.velocity.x / 10, 1), 2);
 						break;
