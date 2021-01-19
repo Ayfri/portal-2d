@@ -32,7 +32,8 @@ export default abstract class Entity extends PIXI.Sprite implements EntityOption
 	abstract setup();
 
 	update() {
-		if (this.hasGravity && this.canFall) this.velocity.y += 0.1;
+		if (!this.canFall) this.velocity.y = 0;
+		else if (this.hasGravity) this.velocity.y += 0.1;
 
 		this.position.x += this.velocity.x;
 		this.position.y += this.velocity.y;
