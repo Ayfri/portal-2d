@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 import { actualScene } from '../app.js';
-import { D, Q } from '../client/InputManager.js';
+import { D, Q, space } from '../client/InputManager.js';
 import * as mathUtils from '../utils/mathUtils';
 import Entity from './Entity';
 import WallEntity from './WallEntity';
@@ -10,9 +10,6 @@ export default class Player extends Entity {
 		super('player', {
 			hasGravity: true,
 		});
-
-		Q.on('down', () => this.move(new PIXI.Point(-1, this.velocity.y / 2), 2));
-		D.on('down', () => this.move(new PIXI.Point(1, this.velocity.y / 2), 2));
 	}
 
 	public setup() {}
@@ -20,18 +17,32 @@ export default class Player extends Entity {
 	public update() {
 		const walls: WallEntity[] = actualScene.children.filter((entity: Entity): entity is WallEntity => entity instanceof WallEntity);
 
+		if (Q.isPressed && this.velocity.x > -5) this.move(new PIXI.Point(-1, 0), 0.4);
+		if (D.isPressed && this.velocity.x < 5) this.move(new PIXI.Point(1, 0), 0.4);
+
+		if (space.isPressed && !this.canFall) {
+			this.move(new PIXI.Point(0, -1), 2.5);
+			this.position.y += this.velocity.y;
+		}
+
 		if (walls.every(wall => !mathUtils.isRectangleCollapse(this, wall))) this.canFall = true;
 
 		walls.forEach(wall => {
 			if (mathUtils.isRectangleCollapse(this, wall)) {
-				const velocity: PIXI.Point = mathUtils.collisionResponse(this, wall);
-				this.position.x += velocity.x;
-				this.position.y += velocity.y;
-				if (velocity.y > 0) this.canFall = false;
-				console.log(velocity);
-				if (velocity.x > 0) {
-					this.velocity.x = 0;
-					this.position.x -= 1;
+				switch (mathUtils.manageRectangleCollisions(wall, this)) {
+					case 'bottom':
+						this.move(new PIXI.Point(this.velocity.x / 10, 1), 2);
+						break;
+
+					case 'top':
+						this.canFall = false;
+						this.move(new PIXI.Point(-this.velocity.x / 20, 1), 2);
+						break;
+
+					case 'left':
+					case 'right':
+						this.move(new PIXI.Point(-this.velocity.x, 0), 1);
+						break;
 				}
 			}
 		});
@@ -39,6 +50,7 @@ export default class Player extends Entity {
 	}
 
 	public move(direction: PIXI.Point, speed: number): void {
-		this.velocity = direction.set(direction.x * speed, direction.y * speed);
+		this.velocity.x += direction.x * speed;
+		this.velocity.y += direction.y * speed;
 	}
 }
