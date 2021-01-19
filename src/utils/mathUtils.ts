@@ -7,8 +7,6 @@ export class Rectangle extends PIXI.Rectangle {
 	public xAnchorOffset: number;
 	public yAnchorOffset: number;
 	public anchor: PIXI.ObservablePoint;
-	public vx: number = 0;
-	public vy: number = 0;
 
 	constructor(x: number, y: number, width: number, height: number, anchor?: PIXI.ObservablePoint) {
 		super(x, y, width, height);
@@ -38,7 +36,7 @@ export function distanceBetweenTwoPoints(p1: PIXI.IPointData, p2: PIXI.IPointDat
 	return Math.hypot(a, b);
 }
 
-// I don't know if it is working ¯\_(ツ)_/¯
+
 export function manageRectangleCollisions(rectangle1: PIXI.DisplayObject, rectangle2: PIXI.DisplayObject) {
 	const rect1 = Rectangle.fromSprite(rectangle1);
 	const rect2 = Rectangle.fromSprite(rectangle2);
@@ -50,7 +48,6 @@ export function manageRectangleCollisions(rectangle1: PIXI.DisplayObject, rectan
 
 	if (Math.abs(vx) < combinedHalfWidths) {
 		if (Math.abs(vy) < combinedHalfHeights) {
-			let s: any;
 			overlapX = combinedHalfWidths - Math.abs(vx);
 			overlapY = combinedHalfHeights - Math.abs(vy);
 
@@ -75,19 +72,4 @@ export function manageRectangleCollisions(rectangle1: PIXI.DisplayObject, rectan
 	}
 
 	return collision;
-}
-
-export function collisionResponse(entityFrom: Entity, entityInto: Entity): PIXI.Point {
-	if (!entityFrom || !entityInto) {
-		return new PIXI.Point(0);
-	}
-
-	const vCollision = new PIXI.Point(entityInto.x - entityFrom.x, entityInto.y - entityFrom.y);
-	const distance = Math.sqrt((entityInto.x - entityFrom.x) * (entityInto.x - entityFrom.x) + (entityInto.y - entityFrom.y) * (entityInto.y - entityFrom.y));
-	const vCollisionNorm = new PIXI.Point(vCollision.x / distance, vCollision.y / distance);
-	const vRelativeVelocity = new PIXI.Point(entityFrom.velocity.x - entityInto.velocity.x, entityFrom.velocity.y - entityInto.velocity.y);
-	const speed = vRelativeVelocity.x * vCollisionNorm.x + vRelativeVelocity.y * vCollisionNorm.y;
-	const impulse = speed / (entityFrom.mass + entityInto.mass);
-
-	return new PIXI.Point(impulse * vCollisionNorm.x, impulse * vCollisionNorm.y);
 }
