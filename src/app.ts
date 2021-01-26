@@ -10,6 +10,10 @@ export const app = new PIXI.Application({
 	backgroundColor: 0xdddddd,
 });
 
+loadTextures().then(() => {
+	tests();
+});
+
 async function loadTextures() {
 	await new Promise(resolve => {
 		PIXI.Loader.shared.add('test', 'assets/test.png');
@@ -41,9 +45,5 @@ function setScene(scene: Scene) {
 	actualScene = scene;
 	app.stage.addChild(actualScene);
 }
-
-loadTextures().then(() => {
-	tests();
-});
 
 document.body.appendChild(app.view);
