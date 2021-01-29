@@ -16,7 +16,7 @@ export default class WallEntity extends Entity {
 	public constructor(x: number, y: number, width: number, height: number);
 	public constructor(options: WallOptions);
 	public constructor(options: WallOptions | number, y?: number, width?: number, height?: number) {
-		super(PIXI.Texture.EMPTY, {
+		super(PIXI.Texture.WHITE, {
 			mass: 1000,
 		});
 
@@ -37,7 +37,7 @@ export default class WallEntity extends Entity {
 		this.position.x = map(this.initial.x, 0, 1920, 0, scene.width);
 		this.position.y = map(this.initial.y, 0, 1080, 0, scene.height);
 		this.width = map(this.initial.width, 0, 1920, 0, scene.width);
-		this.height = map(this.initial.height, 0, 1920, 0, scene.width);
+		this.height = map(this.initial.height, 0, 1080, 0, scene.height);
 
 		return this;
 	}

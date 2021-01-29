@@ -1,5 +1,7 @@
 import * as PIXI from 'pixi.js';
 
+export type TouchingWallSide = 'top' | 'bottom' | 'left' | 'right';
+
 export class Rectangle extends PIXI.Rectangle {
 	public halfWidth: number;
 	public halfHeight: number;
@@ -35,7 +37,7 @@ export function distanceBetweenTwoPoints(p1: PIXI.IPointData, p2: PIXI.IPointDat
 	return Math.hypot(a, b);
 }
 
-export function manageRectangleCollisions(rectangle1: PIXI.DisplayObject, rectangle2: PIXI.DisplayObject) {
+export function manageRectangleCollisions(rectangle1: PIXI.DisplayObject, rectangle2: PIXI.DisplayObject): TouchingWallSide {
 	const rect1 = Rectangle.fromSprite(rectangle1);
 	const rect2 = Rectangle.fromSprite(rectangle2);
 	const vx = rect1.x + Math.abs(rect1.halfWidth) - rect1.xAnchorOffset - (rect2.x + Math.abs(rect2.halfWidth) - rect2.xAnchorOffset);
