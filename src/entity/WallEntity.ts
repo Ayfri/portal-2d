@@ -16,7 +16,7 @@ export default class WallEntity extends Entity {
 	public constructor(x: number, y: number, width: number, height: number);
 	public constructor(options: WallOptions);
 	public constructor(options: WallOptions | number, y?: number, width?: number, height?: number) {
-		super(PIXI.Texture.WHITE, {
+		super(PIXI.Texture.EMPTY, {
 			mass: 1000,
 		});
 

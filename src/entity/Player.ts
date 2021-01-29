@@ -20,13 +20,12 @@ export default class Player extends Entity {
 		} else {
 			if (Q.isPressed && this.velocity.x > -4) this.move(new PIXI.Point(-1, 0), 0.7);
 			if (D.isPressed && this.velocity.x < 4) this.move(new PIXI.Point(1, 0), 0.7);
-			this.velocity.x *= 0.90;
-		
+			this.velocity.x *= 0.9;
 		}
+		
 		if (space.isPressed && this.isOnGround) {
 			this.move(new PIXI.Point(0, -1), 0.8);
 			this.position.y += this.velocity.y;
 		}
-		
 	}
 }

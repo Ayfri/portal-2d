@@ -30,19 +30,22 @@ export default class TestChamber extends ChamberScene {
 		if (!isRectangleCollapse(new Rectangle(0, 0, window.innerWidth, window.innerHeight), this.player)) {
 			this.spawnPlayer();
 		}
-		
-		this.debugText.text = JSON.stringify({
-			position: {
-				x: this.player.position.x,
-				y: this.player.position.y
+
+		this.debugText.text = JSON.stringify(
+			{
+				position: {
+					x: this.player.position.x,
+					y: this.player.position.y,
+				},
+				velocity: this.player.velocity,
+				states: {
+					hasGravity: this.player.hasGravity,
+					onGround: this.player.isOnGround,
+				},
+				touchingWalls: [...this.player.touchingWall.entries()].map(w => `${w[0]}`),
 			},
-			velocity: this.player.velocity,
-			states: {
-				hasGravity: this.player.hasGravity,
-				onGround:   this.player.isOnGround,
-			},
-			touchingWalls: [...this.player.touchingWall.entries()].map(w => `${w[0]}`)
-		}, null, 4);
-		
+			null,
+			4
+		);
 	}
 }
