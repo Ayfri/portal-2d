@@ -3,7 +3,6 @@ import ChamberScene from './ChamberScene.js';
 import * as PIXI from 'pixi.js';
 
 export default class TestChamber extends ChamberScene {
-	public debugText: PIXI.Text;
 	public constructor() {
 		super(new PIXI.Point(1600, 500));
 	}
@@ -21,8 +20,16 @@ export default class TestChamber extends ChamberScene {
 
 		this.addWall(0, 1080 - 184, 1920, 184);
 		this.addWall(0, 0, 194, 1080);
-		this.debugText = new PIXI.Text('');
-		this.addChild(this.debugText);
+		this.addWall(1920 - 125, 0, 125, 1080);
+		this.addWall(0, 0, 1920, 44);
+		this.addWall(719, 531, 143, 366);
+		this.addWall(1029, 345, 297, 77);
+		this.addWall(862, 681, 184, 73);
+		this.addWall(1379, 601, 416, 119);
+		this.addWall(273, 711, 279, 63);
+		this.addWall(587, 579, 132, 43);
+		this.addWall(194, 307, 298, 69);
+		this.addWall(1029, 44, 171, 301);
 	}
 
 	public update() {
@@ -31,7 +38,7 @@ export default class TestChamber extends ChamberScene {
 			this.spawnPlayer();
 		}
 
-		this.debugText.text = JSON.stringify(
+		/*this.debugText.text = JSON.stringify(
 			{
 				position: {
 					x: this.player.position.x,
@@ -46,6 +53,6 @@ export default class TestChamber extends ChamberScene {
 			},
 			null,
 			4
-		);
+		);*/
 	}
 }
