@@ -1,6 +1,9 @@
 import * as PIXI from 'pixi.js';
+import Player from './entity/Player.js';
+import WallEntity from './entity/WallEntity.js';
 import Scene from './scenes/Scene.js';
 import TestChamber from './scenes/TestChamber.js';
+import { isRectangleCollapse } from './utils/collisionsUtils.js';
 
 export let actualScene: Scene;
 
@@ -33,12 +36,16 @@ function tests() {
 	PIXI.Ticker.shared.add(
 		() => {
 			actualScene?.update();
+			window['player'] = actualScene.children.find(c => c instanceof Player);
+			window['walls'] = actualScene.children.filter(c => c instanceof WallEntity);
+			window['isRectangleCollapse'] = isRectangleCollapse;
 		},
 		undefined,
 		PIXI.UPDATE_PRIORITY.HIGH
 	);
 
 	setScene(new TestChamber());
+	window['actualScene'] = actualScene;
 }
 
 function setScene(scene: Scene) {
@@ -47,3 +54,5 @@ function setScene(scene: Scene) {
 }
 
 document.body.appendChild(app.view);
+window['app'] = app;
+window['PIXI'] = PIXI;
