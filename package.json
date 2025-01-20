@@ -4,7 +4,7 @@
 		"url": "https://github.com/Ayfri/portal-2d/issues"
 	},
 	"dependencies": {
-		"pixi.js": "^5.3.7"
+		"pixi.js": "^6.1.0"
 	},
 	"description": "A portal game made in TypeScript using PIXI.",
 	"devDependencies": {
